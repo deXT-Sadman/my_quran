@@ -1,9 +1,9 @@
 class Surah {
-  final int number;
+  final int number; // ← int, not String
   final String name;
   final String englishName;
   final String englishNameTranslation;
-  final String numberOfAyahs;
+  final int numberOfAyahs; // ← int, not String
   final String revelationType;
 
   Surah({
@@ -17,12 +17,12 @@ class Surah {
 
   factory Surah.fromJson(Map<String, dynamic> json) {
     return Surah(
-      number: json['number'],
-      name: json['name'],
-      englishName: json['englishName'],
-      englishNameTranslation: json['englishNameTranslation'],
-      numberOfAyahs: json['numberOfAyahs'],
-      revelationType: json['revelationType'],
+      number: json['number'] as int, // ← add 'as int'
+      name: json['name'] as String,
+      englishName: json['englishName'] as String,
+      englishNameTranslation: json['englishNameTranslation'] as String,
+      numberOfAyahs: json['numberOfAyahs'] as int, // ← add 'as int'
+      revelationType: json['revelationType'] as String,
     );
   }
 }
