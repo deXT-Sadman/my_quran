@@ -39,6 +39,17 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
     });
   }
 
+  Future<void> _playAudio(String url, int index) async {
+    if (_playingIndex == index) {
+      await _audioPlayer.stop();
+      setState(() => _playingIndex = null);
+    } else {
+      await _audioPlayer.stop();
+      await _audioPlayer.play(UrlSource(url));
+      setState(() => _playingIndex = index);
+    }
+  }
+
   Future<void> _toggleBookmark(Ayah ayah) async {
     final isBookmarked = _bookmarkedAyahs.contains(ayah.numberInSurah);
     if (isBookmarked) {
@@ -137,7 +148,7 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
                 showTranslation: _showTranslation,
                 isPlaying: _playingIndex == index,
                 isBookmarked: _bookmarkedAyahs.contains(ayah.numberInSurah),
-                onPlay: () => _playAudio(ayah.audioUrl, index),
+                onPlayTap: () => _playAudio(ayah.audioUrl, index),
                 onBookmarkTap: () => _toggleBookmark(ayah),
               );
             },

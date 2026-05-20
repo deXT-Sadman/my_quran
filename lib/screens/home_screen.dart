@@ -38,11 +38,10 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.bookmark, color: Color(0xFFD4AF37)),
-            onPressed: () {},
-            //  => Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (_) => const BookmarksScreen()),
-            // ),
+            onPressed: () => Navigator.push(
+              context,
+              MaterialPageRoute(builder: (_) => const BookmarksScreen()),
+            ),
           ),
         ],
       ),
@@ -70,8 +69,14 @@ class _HomeScreenState extends State<HomeScreen> {
             itemBuilder: (context, index) {
               return SurahCard(
                 surah: surahs[index],
-                onTap: () {},
-                //  Navigator.push(context, MaterialPageRoute(builder: (_) => SurahDetailScreen(surah: surahs[index]),),),
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => SurahDetailScreen(surah: surahs[index]),
+                    ),
+                  );
+                },
               );
             },
           );
