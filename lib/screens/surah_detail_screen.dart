@@ -25,7 +25,7 @@ class _SurahDetailScreenState extends State<SurahDetailScreen> {
   @override
   void initState() {
     super.initState();
-    _ayahFuture = QuranService().fetchAyahs(widget.surah.number);
+    _ayahFuture = QuranService.fetchSurahDetail(widget.surah.number);
     _loadBookmarks();
   }
 
