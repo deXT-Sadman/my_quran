@@ -40,8 +40,8 @@
 
 | Layer | Technology |
 |---|---|
-| **Framework** | Flutter 3.x |
-| **Language** | Dart 3.x |
+| **Framework** | Flutter 3.41.9 |
+| **Language** | Dart 3.11.5 |
 | **API** | [Al-Quran Cloud API](https://alquran.cloud/api) |
 | **HTTP Client** | `http` package |
 | **Audio** | `audioplayers` |
