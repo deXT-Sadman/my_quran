@@ -1,6 +1,6 @@
-import "package:flutter/material.dart";
-import "package:google_fonts/google_fonts.dart";
-import "../models/ayah.dart";
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import '../models/ayah.dart';
 
 class AyahTile extends StatelessWidget {
   final Ayah ayah;
@@ -31,79 +31,90 @@ class AyahTile extends StatelessWidget {
         border: Border.all(
           color: isPlaying
               ? const Color(0xFFD4AF37)
-              : Color(0xFFD4AF37).withValues(alpha: 0.5),
-          width: 2,
+              : const Color(0xFFD4AF37).withValues(alpha: 0.2),
         ),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
+          // ── Top bar: actions (left) + verse number (right) ──
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
                   IconButton(
-                    onPressed: onPlayTap,
+                    padding: EdgeInsets.zero,
+                    constraints: const BoxConstraints(),
                     icon: Icon(
-                      isPlaying ? Icons.stop : Icons.play_arrow,
+                      isPlaying ? Icons.pause_circle : Icons.play_circle,
                       color: const Color(0xFFD4AF37),
                       size: 28,
                     ),
+                    onPressed: onPlayTap,
                   ),
+                  const SizedBox(width: 8),
                   IconButton(
-                    onPressed: onBookmarkTap,
+                    padding: EdgeInsets.zero,
+                    constraints: const BoxConstraints(),
                     icon: Icon(
-                      Icons.bookmark_border,
+                      isBookmarked ? Icons.bookmark : Icons.bookmark_border,
                       color: const Color(0xFFD4AF37),
                     ),
-                  ),
-
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 10,
-                      vertical: 4,
-                    ),
-                    decoration: BoxDecoration(
-                      color: const Color(0xFFD4AF37).withValues(alpha: 0.2),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    child: Text(
-                      "${ayah.numberInSurah}",
-                      style: GoogleFonts.lato(
-                        color: const Color(0xFFD4AF37),
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    onPressed: onBookmarkTap,
                   ),
                 ],
               ),
-              const SizedBox(height: 12),
-              Text(
-                ayah.arabicText,
-                textAlign: TextAlign.right,
-                style: GoogleFonts.amiri(
-                  color: Colors.white,
-                  fontSize: 22,
-                  fontWeight: FontWeight.w500,
-                  height: 2.0,
+              // Verse number badge
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
                 ),
-              ),
-              if (showTranslation) ...[
-                const Divider(color: Colors.white24, height: 24),
-                Text(
-                  ayah.translation,
-                  textAlign: TextAlign.right,
-                  style: GoogleFonts.lato(
-                    color: Colors.white70,
-                    fontSize: 14,
-                    height: 1.6,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: const Color(0xFFD4AF37).withOpacity(0.5),
                   ),
                 ),
-              ],
+                child: Text(
+                  '${ayah.numberInSurah}',
+                  style: const TextStyle(
+                    color: Color(0xFFD4AF37),
+                    fontSize: 12,
+                  ),
+                ),
+              ),
             ],
           ),
+
+          const SizedBox(height: 12),
+
+          Directionality(
+            textDirection: TextDirection.rtl, // ← forces right-to-left
+            child: Text(
+              ayah.arabicText,
+              textAlign: TextAlign.right,
+              style: GoogleFonts.amiri(
+                color: Colors.white,
+                fontSize: 22,
+                height: 2.0,
+              ),
+            ),
+          ),
+
+          if (showTranslation) ...[
+            const Divider(color: Colors.white24, height: 24),
+            Text(
+              ayah.translation,
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                color: Colors.white.withValues(alpha: 0.7),
+                fontSize: 14,
+                height: 1.6,
+              ),
+            ),
+          ],
         ],
       ),
     );
